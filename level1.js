@@ -67,7 +67,7 @@ function enterPressed() {
 }
 
 function backspacePressed() {
-	alert("Backspace pressed");
+	enteredText = enteredText.substring(0, enteredText.length - 1);
 }
 
 function deletePressed() {
