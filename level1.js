@@ -47,6 +47,7 @@ function textAreaKeyPress() {
 	backspacePressed();
     } else if (key == 46) {
 	deletePressed();
+	return false;
     } else {
  	enteredText += keyValue;
     }
@@ -55,7 +56,7 @@ function textAreaKeyPress() {
 
 function enterPressed() {
         if (!nameEntered) {
-  		user = enteredText;
+  		user = enteredText.toLowerCase();
 		nameEntered = true;
 	}  
 	
@@ -71,5 +72,5 @@ function backspacePressed() {
 }
 
 function deletePressed() {
-	alert("Delete pressed");
+	
 }
