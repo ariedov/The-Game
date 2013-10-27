@@ -1,7 +1,11 @@
 var battlefield;
+var user;
 
 var welcomeText = 
 "Welcome stranger.\nPlease say me your name: ";
+
+var nameEntered = false;
+var enteredText = "";
 
 function moveCaretToEnd(el) {
     if (typeof el.selectionStart == "number") {
@@ -22,11 +26,8 @@ window.onload = function() {
 	battlefield.innerText += welcomeText;
 	moveCaretToEnd(battlefield);
 
-	battlefield.onkeypress = textAreaKeyPress;
+	battlefield.onkeydown = textAreaKeyPress;
 }
-
-var nameEntered = false;
-var enteredText = "";
 
 function textAreaKeyPress() { 
     var key;
@@ -37,16 +38,35 @@ function textAreaKeyPress() {
     } else {
        key = e.which;
     }
+
+    console.log(key);
     if (key == 13) {
         enterPressed();
-   } else {
-	enteredText += keyValue;
+    } else if (key == 8) {
+	backspacePressed();
+    } else if (key == 46) {
+	deletePressed();
+    } else {
+ 	enteredText += keyValue;
     }
     return true;
 }
 
 function enterPressed() {
-          
+        if (!nameEntered) {
+  		user = enteredText;
+	}  
 	console.log(enteredText);
         enteredText = "";   
+
+	battlefield.innerText += "" + user + "$ ";
+	moveCaretToEnd(battlefield);
+}
+
+function backspacePressed() {
+	alert("Backspace pressed");
+}
+
+function deletePressed() {
+	alert("Delete pressed");
 }
