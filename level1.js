@@ -23,7 +23,7 @@ window.onload = function() {
 	battlefield = document.getElementById("input");
 	console.log(battlefield);
 	
-	battlefield.innerText += welcomeText;
+	battlefield.value += welcomeText;
 	moveCaretToEnd(battlefield);
 
 	battlefield.onkeydown = textAreaKeyPress;
@@ -42,6 +42,7 @@ function textAreaKeyPress() {
     console.log(key);
     if (key == 13) {
         enterPressed();
+	return false;
     } else if (key == 8) {
 	backspacePressed();
     } else if (key == 46) {
@@ -55,11 +56,13 @@ function textAreaKeyPress() {
 function enterPressed() {
         if (!nameEntered) {
   		user = enteredText;
+		nameEntered = true;
 	}  
-	console.log(enteredText);
+	
         enteredText = "";   
 
-	battlefield.innerText += "" + user + "$ ";
+	console.log(user);
+	battlefield.value += "\n" + user + "$ ";
 	moveCaretToEnd(battlefield);
 }
 
