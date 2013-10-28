@@ -29,17 +29,17 @@ window.onload = function() {
 	battlefield.onkeydown = textAreaKeyPress;
 }
 
-function textAreaKeyPress() { 
+function textAreaKeyPress(event) { 
     var key;
     var keyValue;
-    if (window.event) {
+    if (event) {
        key = event.keyCode;
        keyValue = String.fromCharCode(key);
     } else {
        key = e.which;
     }
 
-    console.log(key);
+    console.log(keyValue);
     if (key == 13) {
         enterPressed();
 	return false;
@@ -63,7 +63,7 @@ function enterPressed() {
         enteredText = "";   
 
 	console.log(user);
-	battlefield.value += "\n" + user + "$ ";
+	battlefield.value += "\n" + user + "@thegame $ ";
 	moveCaretToEnd(battlefield);
 }
 
