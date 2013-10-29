@@ -33,7 +33,7 @@ window.onload = function() {
 function textAreaKeyPress(event) { 
     var key;
     var keyValue;
-    var inputCheck = /^[a-z0-9_-]+$/i;
+    var inputCheck = /^[a-z0-9_-\s]+$/i;
     if (event) {
        	key = event.keyCode;
        	keyValue = String.fromCharCode(key);
@@ -57,6 +57,8 @@ function textAreaKeyPress(event) {
 }
 
 function enterPressed() {
+	var commandLine = enteredText.toLowerCase().split(" ");	
+	startCommand(commandLine[0], commandLine[1]);
         enteredText = "";   
 
 	console.log(user);
@@ -65,6 +67,7 @@ function enterPressed() {
 }
 
 function writeConsoleLine() {
+	//var user = window.name;
 	battlefield.value += "\n" + ((typeof user === 'undefined') ? ("noname") : (user)) + "@thegame $ ";
 }
 
