@@ -1,5 +1,3 @@
-textarea { overflow: auto; }
-
 .battlefield {
     display: block;
     position:absolute;
@@ -12,16 +10,19 @@ textarea { overflow: auto; }
     background-color: black;
 }
 
-.battlefield textarea {
-    display: block;
+textarea {
     position:absolute;
+    bottom:0px;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    z-index:99;
     height:100%;
     width:100%;
-    bottom:0;
-    top:0;
-    left:0;
-    right:0;
     background-color: black;
     color: green;
-    border: none;
+    border: thick solid green;
+    overflow:hidden;
+    box-sizing:border-box;
 }
