@@ -44,7 +44,7 @@ function textAreaKeyPress(event) {
         enterPressed();
 	return false;
     } else if (key == 8) {
-	backspacePressed();
+	return backspacePressed();
     } else if (key == 46) {
 	deletePressed();
 	return false;
@@ -68,7 +68,11 @@ function enterPressed() {
 }
 
 function backspacePressed() {
-	enteredText = enteredText.substring(0, enteredText.length - 1);
+	if (enteredText.length > 0) {
+		enteredText = enteredText.substring(0, enteredText.length - 1);
+		battlefield.value = battlefield.substring(0, enteredText.lenght -1);
+	}
+	return false;
 }
 
 function deletePressed() {
