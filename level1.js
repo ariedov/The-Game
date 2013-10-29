@@ -70,7 +70,8 @@ function enterPressed() {
 function backspacePressed() {
 	if (enteredText.length > 0) {
 		enteredText = enteredText.substring(0, enteredText.length - 1);
-		battlefield.value = battlefield.substring(0, enteredText.lenght -1);
+		value = battlefield.value;
+		battlefield.value = value.substring(0, value.length - 1);
 	}
 	return false;
 }
