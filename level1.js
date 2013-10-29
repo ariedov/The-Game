@@ -32,11 +32,12 @@ window.onload = function() {
 function textAreaKeyPress(event) { 
     var key;
     var keyValue;
+    var inputCheck = /^[a-z0-9]+$/i;
     if (event) {
-       key = event.keyCode;
-       keyValue = String.fromCharCode(key);
+       	key = event.keyCode;
+       	keyValue = String.fromCharCode(key);
     } else {
-       key = e.which;
+       	key = e.which;
     }
 
     console.log(keyValue);
@@ -48,7 +49,7 @@ function textAreaKeyPress(event) {
     } else if (key == 46) {
 	deletePressed();
 	return false;
-    } else {
+    } else if (keyValue.match(inputCheck)) {
  	enteredText += keyValue;
     }
     return true;
