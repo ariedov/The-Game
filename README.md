@@ -17,6 +17,7 @@ Main actions:
     inventory - shows your inventory
     pick <name> - picks item from inverntory
     hand - shows item in your hand
+    name <text> - sets user name	
     
     help - shows main help for the game
     help <command> - shows command help
