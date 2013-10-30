@@ -58,7 +58,10 @@ function textAreaKeyPress(event) {
 
 function enterPressed() {
 	var commandLine = enteredText.toLowerCase().split(" ");	
-	startCommand(commandLine[0], commandLine[1]);
+	var consoleResult = startCommand(commandLine[0], commandLine[1]);
+	if (consoleResult != undefined) {
+		battlefield.value += "\n" + consoleResult;
+	}
         enteredText = "";   
 
 	console.log(user);
