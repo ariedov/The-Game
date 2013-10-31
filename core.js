@@ -70,6 +70,8 @@ function enterPressed() {
 
 	console.log(user);
 	writeConsoleLine();
+	battlefield.scrollTop = battlefield.scrollHeight
+
 	moveCaretToEnd(battlefield);
 }
 

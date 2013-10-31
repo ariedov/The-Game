@@ -24,5 +24,6 @@ textarea {
     color: green;
     border: thick solid green;
     overflow:hidden;
+    overflow-y: scroll;
     box-sizing:border-box;
 }
