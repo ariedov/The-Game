@@ -50,9 +50,14 @@ function textAreaKeyPress(event) {
     } else if (key == 46) {
 	deletePressed();
 	return false;
-    } 
+    } else if (key == 37) { // left
 	
-    if (keyValue.match(inputCheck)) {
+    } else if (key == 38) { // up
+	return false;
+    } else if (key == 39) { // right
+    } else if (key == 40) { // down
+	return false;
+    } else if (keyValue.match(inputCheck)) {
  	enteredText += keyValue;
     } else {
 	return false;
