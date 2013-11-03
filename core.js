@@ -53,7 +53,8 @@ function textAreaKeyPress(event) {
     } else if (key == 37) { // left
 	
     } else if (key == 38) { // up
-	return false;
+		upPressed();
+		return false;
     } else if (key == 39) { // right
     } else if (key == 40) { // down
 	return false;
@@ -96,4 +97,9 @@ function backspacePressed() {
 
 function deletePressed() {
 	
+}
+
+function upPressed() {
+	var lastExecuted = commandHistory.pop();
+	battlefield.value += lastExecuted;
 }
