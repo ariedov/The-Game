@@ -102,4 +102,5 @@ function deletePressed() {
 function upPressed() {
 	var lastExecuted = commandHistory.pop();
 	battlefield.value += lastExecuted;
+	enteredText += lastExecuted;
 }
