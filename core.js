@@ -108,7 +108,6 @@ function upPressed() {
 	var lastExecuted = commandHistory.pop();
 	if (lastExecuted != undefined) {
 		var allScreen = battlefield.value;
-		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
 		enteredText = lastExecuted;
 		battlefield.value += enteredText;
 	}
