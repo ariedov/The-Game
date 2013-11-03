@@ -72,6 +72,10 @@ function enterPressed() {
 	if (consoleResult != undefined) {
 		battlefield.value += "\n" + consoleResult;
 	}
+
+	if (enteredText.length > 0) {
+		commandHistory.push(enteredText);
+	}
         enteredText = "";   
 
 	console.log(user);
@@ -79,6 +83,7 @@ function enterPressed() {
 	battlefield.scrollTop = battlefield.scrollHeight
 
 	moveCaretToEnd(battlefield);
+
 }
 
 function writeConsoleLine() {
@@ -101,5 +106,10 @@ function deletePressed() {
 
 function upPressed() {
 	var lastExecuted = commandHistory.pop();
-	battlefield.value += lastExecuted;
+	if (lastExecuted != undefined) {
+		var allScreen = battlefield.value;
+		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
+		enteredText = lastExecuted;
+		battlefield.value += enteredText;
+	}
 }
