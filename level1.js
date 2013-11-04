@@ -22,3 +22,6 @@ Level1.prototype.down = function() {
 
 Level1.prototype.go = function() {
 }
+
+Level1.prototype.pick = function() {
+}
