@@ -52,7 +52,17 @@ commandActions = {
 function startCommand(command, param) {
 	action = commandActions[command];
 
-	commandHistory.push(command + " " + param);
+	var savedCommand;
+	if (command != undefined && command.length > 0) {
+		savedCommand = command;
+	}
+	if (param != undefined) {
+		savedCommand += " " + param;
+	}
+	
+	if (savedCommand != undefined) {
+		commandHistory.push(savedCommand);
+	}
 
 	if (action != undefined) {
 		return action(param);

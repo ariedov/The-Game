@@ -73,9 +73,6 @@ function enterPressed() {
 		battlefield.value += "\n" + consoleResult;
 	}
 
-	if (enteredText.length > 0) {
-		commandHistory.push(enteredText);
-	}
         enteredText = "";   
 
 	console.log(user);
