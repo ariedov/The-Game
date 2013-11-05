@@ -1,5 +1,4 @@
 var user;
-var commandHistory = new Array();
 
 var helpText = 	"pick - picks up a item from floor.\n" +
 	 	"drop - drops item to the floor.\n" +
@@ -51,19 +50,6 @@ commandActions = {
 
 function startCommand(command, param) {
 	action = commandActions[command];
-
-	var savedCommand;
-	if (command != undefined && command.length > 0) {
-		savedCommand = command;
-	}
-	if (param != undefined) {
-		savedCommand += " " + param;
-	}
-	
-	if (savedCommand != undefined) {
-		commandHistory.push(savedCommand);
-	}
-
 	if (action != undefined) {
 		return action(param);
 	}

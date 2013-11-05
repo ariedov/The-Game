@@ -1,3 +1,4 @@
+var commandHistory = new Array();
 var battlefield;
 var user;
 var level;
@@ -72,7 +73,10 @@ function enterPressed() {
 	if (consoleResult != undefined) {
 		battlefield.value += "\n" + consoleResult;
 	}
-
+	
+	if (enteredText != undefined && enteredText.length > 0) {
+		commandHistory.push(enteredText.toLowerCase());
+	}
         enteredText = "";   
 
 	console.log(user);
