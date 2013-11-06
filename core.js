@@ -1,4 +1,5 @@
 var commandHistory = new Array();
+var historyCursor = 0;
 var battlefield;
 var user;
 var level;
@@ -76,6 +77,7 @@ function enterPressed() {
 	
 	if (enteredText != undefined && enteredText.length > 0) {
 		commandHistory.push(enteredText.toLowerCase());
+		historyCursor = commandHistory.length - 1;
 	}
         enteredText = "";   
 
@@ -106,7 +108,8 @@ function deletePressed() {
 }
 
 function upPressed() {
-	var lastExecuted = commandHistory.pop();
+	var lastExecuted = commandHistory[historyCursor];
+	historyCursor -= 1;
 	if (lastExecuted != undefined) {
 		var allScreen = battlefield.value;
 		enteredText = lastExecuted;
