@@ -20,7 +20,6 @@ function moveCaretToEnd(el) {
 window.onload = function() {
 
 	battlefield = document.getElementById("input");
-	console.log(battlefield);
 	
 	moveCaretToEnd(battlefield);
 
@@ -43,7 +42,6 @@ function textAreaKeyPress(event) {
        	key = e.which;
     }
 
-    console.log(keyValue);
     if (key == 13) {
         enterPressed();
 	return false;
@@ -55,10 +53,11 @@ function textAreaKeyPress(event) {
     } else if (key == 37) { // left
 	
     } else if (key == 38) { // up
-		upPressed();
-		return false;
+	upPressed();
+	return false;
     } else if (key == 39) { // right
     } else if (key == 40) { // down
+	downPressed();
 	return false;
     } else if (keyValue.match(inputCheck)) {
  	enteredText += keyValue;
@@ -77,11 +76,11 @@ function enterPressed() {
 	
 	if (enteredText != undefined && enteredText.length > 0) {
 		commandHistory.push(enteredText.toLowerCase());
-		historyCursor = commandHistory.length - 1;
+		historyCursor = commandHistory.length;
+		console.log(historyCursor);
 	}
         enteredText = "";   
 
-	console.log(user);
 	writeConsoleLine();
 	battlefield.scrollTop = battlefield.scrollHeight
 
@@ -108,12 +107,35 @@ function deletePressed() {
 }
 
 function upPressed() {
+	if (historyCursor > 0) {
+		historyCursor -= 1;		
+	}		
 	var lastExecuted = commandHistory[historyCursor];
-	historyCursor -= 1;
+
 	if (lastExecuted != undefined) {
 		var allScreen = battlefield.value;
 		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
 		enteredText = lastExecuted;
 		battlefield.value += enteredText;
 	}
+
+	console.log(historyCursor);
 }
+
+function downPressed() {
+	if (historyCursor > commandHistory.length - 1)	{
+		var allScreen = battlefield.value;
+		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
+		return false;
+	}
+	historyCursor += 1;
+	var lastExecuted = commandHistory[historyCursor];
+	if (lastExecuted != undefined) {
+		var allScreen = battlefield.value;
+		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
+		enteredText = lastExecuted;
+		battlefield.value += enteredText;
+	}
+	console.log(historyCursor);
+}
+
