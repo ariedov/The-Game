@@ -1,4 +1,4 @@
-var commandHistory = new Array();
+var commandHistory = [];
 var historyCursor = 0;
 var battlefield;
 var user;
@@ -51,11 +51,10 @@ function textAreaKeyPress(event) {
         deletePressed();
         return false;
     } else if (key == 37) { // left
-
+    } else if (key == 39) { // right
     } else if (key == 38) { // up
         upPressed();
         return false;
-    } else if (key == 39) { // right
     } else if (key == 40) { // down
         downPressed();
         return false;
@@ -82,7 +81,7 @@ function enterPressed() {
     enteredText = "";
 
     writeConsoleLine();
-    battlefield.scrollTop = battlefield.scrollHeight
+    battlefield.scrollTop = battlefield.scrollHeight;
 
     moveCaretToEnd(battlefield);
 
