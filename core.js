@@ -17,125 +17,127 @@ function moveCaretToEnd(el) {
     }
 }
 
-window.onload = function() {
+window.onload = function () {
 
-	battlefield = document.getElementById("input");
-	
-	moveCaretToEnd(battlefield);
+    battlefield = document.getElementById("input");
 
-	battlefield.onkeydown = textAreaKeyPress;
+    moveCaretToEnd(battlefield);
 
-	level = new Level1();
-	level.load();
-	
-	writeConsoleLine();
+    battlefield.onkeydown = textAreaKeyPress;
+
+    level = new Level1();
+    level.load();
+
+    writeConsoleLine();
 }
 
-function textAreaKeyPress(event) { 
+function textAreaKeyPress(event) {
     var key;
     var keyValue;
     var inputCheck = /^[a-z0-9\s]+$/i;
     if (event) {
-       	key = event.keyCode;
-       	keyValue = String.fromCharCode(key);
+        key = event.keyCode;
+        keyValue = String.fromCharCode(key);
     } else {
-       	key = e.which;
+        key = e.which;
     }
 
     if (key == 13) {
         enterPressed();
-	return false;
+        return false;
     } else if (key == 8) {
-	return backspacePressed();
+        return backspacePressed();
     } else if (key == 46) {
-	deletePressed();
-	return false;
+        deletePressed();
+        return false;
     } else if (key == 37) { // left
-	
+
     } else if (key == 38) { // up
-	upPressed();
-	return false;
+        upPressed();
+        return false;
     } else if (key == 39) { // right
     } else if (key == 40) { // down
-	downPressed();
-	return false;
+        downPressed();
+        return false;
     } else if (keyValue.match(inputCheck)) {
- 	enteredText += keyValue;
+        enteredText += keyValue;
     } else {
-	return false;
+        return false;
     }
     return true;
 }
 
 function enterPressed() {
-	var commandLine = enteredText.toLowerCase().split(" ");	
-	var consoleResult = startCommand(commandLine[0], commandLine[1]);
-	if (consoleResult != undefined) {
-		battlefield.value += "\n" + consoleResult;
-	}
-	
-	if (enteredText != undefined && enteredText.length > 0) {
-		commandHistory.push(enteredText.toLowerCase());
-		historyCursor = commandHistory.length;
-		console.log(historyCursor);
-	}
-        enteredText = "";   
+    var commandLine = enteredText.toLowerCase().split(" ");
+    var consoleResult = startCommand(commandLine[0], commandLine[1]);
+    if (consoleResult != undefined) {
+        battlefield.value += "\n" + consoleResult;
+    }
 
-	writeConsoleLine();
-	battlefield.scrollTop = battlefield.scrollHeight
+    if (enteredText != undefined && enteredText.length > 0) {
+        commandHistory.push(enteredText.toLowerCase());
+        historyCursor = commandHistory.length;
+        console.log(historyCursor);
+    }
+    enteredText = "";
 
-	moveCaretToEnd(battlefield);
+    writeConsoleLine();
+    battlefield.scrollTop = battlefield.scrollHeight
+
+    moveCaretToEnd(battlefield);
 
 }
 
 function writeConsoleLine() {
-	//var user = window.name;
-	battlefield.value += "\n" + ((typeof user === 'undefined') ? ("noname") : (user)) + "@thegame $ ";
+    //var user = window.name;
+    battlefield.value += "\n" + ((typeof user === 'undefined') ? ("noname") : (user)) + "@thegame $ ";
 }
 
 function backspacePressed() {
-	if (enteredText.length > 0) {
-		enteredText = enteredText.substring(0, enteredText.length - 1);
-		value = battlefield.value;
-		battlefield.value = value.substring(0, value.length - 1);
-	}
-	return false;
+    if (enteredText.length > 0) {
+        enteredText = enteredText.substring(0, enteredText.length - 1);
+        value = battlefield.value;
+        battlefield.value = value.substring(0, value.length - 1);
+    }
+    return false;
 }
 
 function deletePressed() {
-	
+
 }
 
 function upPressed() {
-	if (historyCursor > 0) {
-		historyCursor -= 1;		
-	}		
-	var lastExecuted = commandHistory[historyCursor];
+    if (historyCursor > 0) {
+        historyCursor -= 1;
+    }
+    var lastExecuted = commandHistory[historyCursor];
 
-	if (lastExecuted != undefined) {
-		var allScreen = battlefield.value;
-		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
-		enteredText = lastExecuted;
-		battlefield.value += enteredText;
-	}
+    if (lastExecuted != undefined) {
+        var allScreen = battlefield.value;
+        battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
+        enteredText = lastExecuted;
+        battlefield.value += enteredText;
+    }
 
-	console.log(historyCursor);
+    console.log(historyCursor);
 }
 
 function downPressed() {
-	if (historyCursor > commandHistory.length - 1)	{
-		var allScreen = battlefield.value;
-		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
-		return false;
-	}
-	historyCursor += 1;
-	var lastExecuted = commandHistory[historyCursor];
-	if (lastExecuted != undefined) {
-		var allScreen = battlefield.value;
-		battlefield.value = allScreen.substring(0, allScreen.length - enteredText.length);
-		enteredText = lastExecuted;
-		battlefield.value += enteredText;
-	}
-	console.log(historyCursor);
+    var allScreenText;
+    if (historyCursor > commandHistory.length - 1 && enteredText.length > 0) {
+        allScreenText = battlefield.value;
+        battlefield.value = allScreenText.substring(0, allScreenText.length - enteredText.length);
+        enteredText = "";
+    } else {
+        historyCursor += 1;
+        var lastExecuted = commandHistory[historyCursor];
+        if (lastExecuted != undefined) {
+            allScreenText = battlefield.value;
+            battlefield.value = allScreenText.substring(0, allScreenText.length - enteredText.length);
+            enteredText = lastExecuted;
+            battlefield.value += enteredText;
+        }
+    }
+    console.log(historyCursor);
 }
 
