@@ -1,5 +1,6 @@
 var commandHistory = [];
 var historyCursor = 0;
+var leftCursor = 0;
 var battlefield;
 var user;
 var level;
@@ -51,7 +52,17 @@ function textAreaKeyPress(event) {
         deletePressed();
         return false;
     } else if (key == 37) { // left
+        if (leftCursor > 0) {
+            leftCursor -= 1;
+        } else {
+            return false;
+        }
     } else if (key == 39) { // right
+        if (leftCursor < enteredText.length) {
+            leftCursor += 1;
+        } else {
+            return false;
+        }
     } else if (key == 38) { // up
         upPressed();
         return false;
@@ -60,6 +71,7 @@ function textAreaKeyPress(event) {
         return false;
     } else if (keyValue.match(inputCheck)) {
         enteredText += keyValue;
+        leftCursor = enteredText.length;
     } else {
         return false;
     }
@@ -83,8 +95,8 @@ function enterPressed() {
     writeConsoleLine();
     battlefield.scrollTop = battlefield.scrollHeight;
 
+    leftCursor = 0;
     moveCaretToEnd(battlefield);
-
 }
 
 function writeConsoleLine() {
