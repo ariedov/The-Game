@@ -124,12 +124,15 @@ function upPressed() {
 
 function downPressed() {
     var allScreenText;
+    historyCursor += 1;
+    if (historyCursor > commandHistory.length) {
+        historyCursor = commandHistory.length;
+    }
     if (historyCursor > commandHistory.length - 1 && enteredText.length > 0) {
         allScreenText = battlefield.value;
         battlefield.value = allScreenText.substring(0, allScreenText.length - enteredText.length);
         enteredText = "";
     } else {
-        historyCursor += 1;
         var lastExecuted = commandHistory[historyCursor];
         if (lastExecuted != undefined) {
             allScreenText = battlefield.value;
