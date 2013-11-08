@@ -20,8 +20,8 @@ var helpText = 	"pick - picks up a item from floor.\n" +
 		"help <item> - shows item help\n";
 
 commandActions = {
-	"name": function(name) { user = name; return "Name changed to " + user; },
-	"help": function(param) { 
+	name: function(name) { user = name; return "Name changed to " + user; },
+	help: function(param) {
 		var commandHelp = {
 			"pick": "picks up a item from floor",
 			"drop": "drops item to the floor",
@@ -32,12 +32,12 @@ commandActions = {
 			"left": "rotates left",
 			"right": "rotates right",
 			"enter": "enters the door",
-			"say <smth>": "prints smth to console",
+			"say": "prints smth to console",
 			"inventory": "shows your inventory",
-			"choose <name>": "picks item from inventory",
+			"choose": "picks item from inventory",
 			"hand": "shows item in your hand",
-			"name <text>": "sets user name",
-			"help": "shows main help for the game",
+			"name": "sets user name",
+			"help": "shows main help for the game"
 		}
 
 		var helpString = commandHelp[param];
@@ -45,12 +45,13 @@ commandActions = {
 			return param + " - " + helpString;
 		}
 		return helpText;
-	},
-}
+	}
+};
 
 function startCommand(command, param) {
 	action = commandActions[command];
 	if (action != undefined) {
 		return action(param);
 	}
-}
+    return "";
+};
