@@ -17,6 +17,22 @@ var labyrinth = [
 ];
 
 function Level1() {
+    this.user = new User();
+    var position = findUserPosition();
+    this.user.setPosition(position[0], position[1]);
+}
+
+function findUserPosition() {
+    var x,y;
+    for (i = 0; i < labyrinth.length; i++) {
+        for (j = 0; j < labyrinth[i].length; j++) {
+            if (labyrinth[i][j] == USER) {
+                x = j;
+                y = i;
+            }
+        }
+    }
+    return [x, y];
 }
 
 Level1.prototype.load = function () {
@@ -24,21 +40,38 @@ Level1.prototype.load = function () {
 };
 
 Level1.prototype.left = function () {
+    var user = this.user;
+    if (user.position.x > 0) {
+
+    }
 };
 
 Level1.prototype.right = function () {
+    var user = this.user;
+    if (user.position.x < labyrinth[user.position.y].length) {
+
+    }
 };
 
 Level1.prototype.up = function () {
+    var user = this.user;
+    if (user.position.y > 0) {
+
+    }
 };
 
 Level1.prototype.down = function () {
-};
-
-Level1.prototype.go = function () {
+    var user = this.user;
+    if (user.position.y < labyrinth.length) {
+        
+    }
 };
 
 Level1.prototype.pick = function () {
+    var labyrinthItem = labyrinth[user.position.y][user.position.x];
+    if (labyrinthItem == JACK) {
+        this.user.pick(labyrinthItem);
+    }
 };
 
 

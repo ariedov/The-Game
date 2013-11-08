@@ -38,14 +38,30 @@ commandActions = {
 			"hand": "shows item in your hand",
 			"name": "sets user name",
 			"help": "shows main help for the game"
-		}
+		};
 
 		var helpString = commandHelp[param];
 		if (helpString != undefined) {
 			return param + " - " + helpString;
 		}
 		return helpText;
-	}
+	},
+    left: function() {
+        level.left();
+        return "Moved to left.";
+    },
+    right: function() {
+        level.right();
+        return "Moved to right.";
+    },
+    up: function() {
+        level.up();
+        return "Moved up.";
+    },
+    down: function() {
+        level.down();
+        return "Moved down.";
+    }
 };
 
 function startCommand(command, param) {
@@ -54,4 +70,4 @@ function startCommand(command, param) {
 		return action(param);
 	}
     return "";
-};
+}
