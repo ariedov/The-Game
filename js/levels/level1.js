@@ -41,36 +41,53 @@ Level1.prototype.load = function () {
 
 Level1.prototype.left = function () {
     var user = this.user;
-    if (user.position.x > 0) {
-
+    var nextPosition = labyrinth[user.position.y][user.position.x - 1];
+    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+    if (user.position.x > 0 && nextIsFree) {
+        labyrinth[user.position.y][user.position.x - 1] = USER;
+        labyrinth[user.position.y][user.position.x] = NONE;
     }
+    this.user.position.x = user.position.x - 1;
 };
 
 Level1.prototype.right = function () {
     var user = this.user;
-    if (user.position.x < labyrinth[user.position.y].length) {
-
+    var nextPosition = labyrinth[user.position.y][user.position.x + 1];
+    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+    if (user.position.x < labyrinth[user.position.y].length && nextIsFree) {
+        labyrinth[user.position.y][user.position.x + 1] = USER;
+        labyrinth[user.position.y][user.position.x] = NONE;
     }
+    this.user.position.x = user.position.x + 1;
 };
 
 Level1.prototype.up = function () {
     var user = this.user;
-    if (user.position.y > 0) {
-
+    var nextPosition = labyrinth[user.position.y - 1][user.position.x];
+    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+    if (user.position.y > 0 && nextIsFree) {
+        labyrinth[user.position.y - 1][user.position.x] = USER;
+        labyrinth[user.position.y][user.position.x] = NONE;
     }
+    this.user.position.y = user.position.y - 1;
 };
 
 Level1.prototype.down = function () {
     var user = this.user;
-    if (user.position.y < labyrinth.length) {
-        
+    var nextPosition = labyrinth[user.position.y + 1][user.position.x];
+    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+    if (user.position.y < labyrinth.length && nextIsFree) {
+        labyrinth[user.position.y + 1][user.position.x] = USER;
+        labyrinth[user.position.y][user.position.x] = NONE;
     }
+    this.user.position.y = user.position.y + 1;
 };
 
 Level1.prototype.pick = function () {
     var labyrinthItem = labyrinth[user.position.y][user.position.x];
     if (labyrinthItem == JACK) {
         this.user.pick(labyrinthItem);
+        labyrinth[user.position.y][user.position.x] = NONE;
     }
 };
 
@@ -87,6 +104,8 @@ Level1.prototype.map = function() {
                 map += "*";
             } else if (item == DOOR) {
                 map += "#";
+            } else if (item == JACK) {
+                map += "\\";
             }
         }
         map += "\n";
