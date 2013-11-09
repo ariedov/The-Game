@@ -4,6 +4,7 @@ var leftCursor = 0;
 var battlefield;
 var user;
 var level;
+var map;
 
 var enteredText = "";
 
@@ -21,16 +22,19 @@ function moveCaretToEnd(el) {
 window.onload = function () {
 
     battlefield = document.getElementById("input");
+    map = document.getElementById("map");
 
     moveCaretToEnd(battlefield);
 
     battlefield.onkeydown = textAreaKeyPress;
+    battlefield.onmousedown = textAreaMouseDown;
 
     level = new Level1();
     level.load();
-
+    map.value = level.map();
+    mapAdjust(map);
     writeConsoleLine();
-}
+};
 
 function textAreaKeyPress(event) {
     var key;
@@ -76,6 +80,17 @@ function textAreaKeyPress(event) {
         return false;
     }
     return true;
+}
+
+function textAreaMouseDown() {
+    return false;
+}
+
+function mapAdjust(o) {
+    o.style.height = "1px";
+    o.style.height = (1 + o.scrollHeight) + "px";
+    o.style.width= "1px";
+    o.style.width = (100 + o.scrollWidth) + "px";
 }
 
 function enterPressed() {

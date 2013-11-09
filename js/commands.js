@@ -59,6 +59,9 @@ commandActions = {
     down: function() {
         level.down();
         return "Moved down.";
+    },
+    map: function() {
+        return level.map();
     }
 };
 
