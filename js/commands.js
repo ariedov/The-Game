@@ -3,7 +3,6 @@ var user;
 var helpText = 	"pick - picks up a item from floor.\n" +
 	 	"drop - drops item to the floor.\n" +
 		"use - uses item action.\n"+
-		"go - moves one step to choosed direction.\n"+
 		"forward - Rotates forward.\n"+
 		"back - Rotates back.\n"+
 		"left - Rotates left.\n"+
@@ -26,7 +25,6 @@ commandActions = {
 			"pick": "picks up a item from floor",
 			"drop": "drops item to the floor",
 			"use": "uses item action",
-			"go": "moves one step to choosed direction",
 			"forward": "rotates forward",
 			"back": "rotates back",
 			"left": "rotates left",
