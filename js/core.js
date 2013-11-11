@@ -31,10 +31,39 @@ window.onload = function () {
 
     level = new Level1();
     level.load();
-    map.value = level.map();
-    mapAdjust(map);
+    map.innerHTML = drawMap(level.map());
     writeConsoleLine();
 };
+
+function drawMap(labyrinth) {
+    var value = "";
+    for (var i = 0; i < labyrinth.length; i++) {
+        value += "<tr>";
+        for (var j = 0; j < labyrinth[i].length; j++) {
+            value += "<td>"
+            switch (labyrinth[i][j]) {
+                case USER:
+                    value += "U";
+                    break;
+                case WALL:
+                    value += "*";
+                    break;
+                case JACK:
+                    value += "/";
+                    break;
+                case NONE:
+                    value += ".";
+                    break;
+                case DOOR:
+                    value += "#";
+                    break;
+            }
+            value += "</td>";
+        }
+        value += "</tr>";
+    }
+    return value;
+}
 
 function textAreaKeyPress(event) {
     var key;
@@ -84,13 +113,6 @@ function textAreaKeyPress(event) {
 
 function textAreaMouseDown() {
     return false;
-}
-
-function mapAdjust(o) {
-    o.style.height = "1px";
-    o.style.height = (1 + o.scrollHeight) + "px";
-    o.style.width= "1px";
-    o.style.width = (100 + o.scrollWidth) + "px";
 }
 
 function enterPressed() {

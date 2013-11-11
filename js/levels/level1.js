@@ -92,25 +92,7 @@ Level1.prototype.pick = function () {
 };
 
 Level1.prototype.map = function() {
-    var map = "";
-    for (var i = 0; i < labyrinth.length; i++) {
-        for (var j = 0; j < labyrinth[i].length; j++) {
-            var item = labyrinth[i][j];
-            if (item == USER) {
-                map += "U";
-            } else if (item == NONE) {
-                map += ".";
-            } else if (item == WALL) {
-                map += "*";
-            } else if (item == DOOR) {
-                map += "#";
-            } else if (item == JACK) {
-                map += "\\";
-            }
-        }
-        map += "\n";
-    }
-    return map;
+    return labyrinth;
 };
 
 

@@ -46,26 +46,23 @@ commandActions = {
 	},
     left: function() {
         level.left();
-        map.value = level.map();
+        map.innerHTML = drawMap(level.map());
         return "Moved to left.";
     },
     right: function() {
         level.right();
-        map.value = level.map();
+        map.innerHTML = drawMap(level.map());
         return "Moved to right.";
     },
     up: function() {
         level.up();
-        map.value = level.map();
+        map.innerHTML = drawMap(level.map());
         return "Moved up.";
     },
     down: function() {
         level.down();
-        map.value = level.map();
+        map.innerHTML = drawMap(level.map());
         return "Moved down.";
-    },
-    map: function() {
-        return level.map();
     }
 };
 
