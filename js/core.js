@@ -40,7 +40,7 @@ function drawMap(labyrinth) {
     for (var i = 0; i < labyrinth.length; i++) {
         value += "<tr>";
         for (var j = 0; j < labyrinth[i].length; j++) {
-            value += "<td>"
+            value += "<td>";
             switch (labyrinth[i][j]) {
                 case USER:
                     value += "U";
@@ -73,7 +73,7 @@ function textAreaKeyPress(event) {
         key = event.keyCode;
         keyValue = String.fromCharCode(key);
     } else {
-        key = e.which;
+        key = event.which;
     }
 
     if (key == 13) {
@@ -142,6 +142,7 @@ function writeConsoleLine() {
 }
 
 function backspacePressed() {
+    var value;
     if (enteredText.length > 0) {
         enteredText = enteredText.substring(0, enteredText.length - 1);
         value = battlefield.value;
