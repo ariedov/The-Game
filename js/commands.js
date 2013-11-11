@@ -71,5 +71,5 @@ function startCommand(command, param) {
 	if (action != undefined) {
 		return action(param);
 	}
-    return "";
+    return "No such command.";
 }
