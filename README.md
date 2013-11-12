@@ -7,7 +7,6 @@ Main actions:
     pick - picks up a item from floor.
     drop - drops item to the floor.
     use - uses item action.
-    go - moves one step to choosed direction.
     forward - Rotates forward.
     back - Rotates back.
     left - Rotates left.

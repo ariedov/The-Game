@@ -4,6 +4,7 @@ var leftCursor = 0;
 var battlefield;
 var user;
 var level;
+var map;
 
 var enteredText = "";
 
@@ -21,15 +22,47 @@ function moveCaretToEnd(el) {
 window.onload = function () {
 
     battlefield = document.getElementById("input");
+    map = document.getElementById("map");
 
     moveCaretToEnd(battlefield);
 
     battlefield.onkeydown = textAreaKeyPress;
+    battlefield.onmousedown = textAreaMouseDown;
 
     level = new Level1();
     level.load();
-
+    map.innerHTML = drawMap(level.map());
     writeConsoleLine();
+};
+
+function drawMap(labyrinth) {
+    var value = "";
+    for (var i = 0; i < labyrinth.length; i++) {
+        value += "<tr>";
+        for (var j = 0; j < labyrinth[i].length; j++) {
+            value += "<td>";
+            switch (labyrinth[i][j]) {
+                case USER:
+                    value += "U";
+                    break;
+                case WALL:
+                    value += "*";
+                    break;
+                case JACK:
+                    value += "/";
+                    break;
+                case NONE:
+                    value += ".";
+                    break;
+                case DOOR:
+                    value += "#";
+                    break;
+            }
+            value += "</td>";
+        }
+        value += "</tr>";
+    }
+    return value;
 }
 
 function textAreaKeyPress(event) {
@@ -40,7 +73,7 @@ function textAreaKeyPress(event) {
         key = event.keyCode;
         keyValue = String.fromCharCode(key);
     } else {
-        key = e.which;
+        key = event.which;
     }
 
     if (key == 13) {
@@ -78,6 +111,10 @@ function textAreaKeyPress(event) {
     return true;
 }
 
+function textAreaMouseDown() {
+    return false;
+}
+
 function enterPressed() {
     var commandLine = enteredText.toLowerCase().split(" ");
     var consoleResult = startCommand(commandLine[0], commandLine[1]);
@@ -105,6 +142,7 @@ function writeConsoleLine() {
 }
 
 function backspacePressed() {
+    var value;
     if (enteredText.length > 0) {
         enteredText = enteredText.substring(0, enteredText.length - 1);
         value = battlefield.value;

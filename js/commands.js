@@ -3,7 +3,6 @@ var user;
 var helpText = 	"pick - picks up a item from floor.\n" +
 	 	"drop - drops item to the floor.\n" +
 		"use - uses item action.\n"+
-		"go - moves one step to choosed direction.\n"+
 		"forward - Rotates forward.\n"+
 		"back - Rotates back.\n"+
 		"left - Rotates left.\n"+
@@ -20,25 +19,24 @@ var helpText = 	"pick - picks up a item from floor.\n" +
 		"help <item> - shows item help\n";
 
 commandActions = {
-	"name": function(name) { user = name; return "Name changed to " + user; },
-	"help": function(param) { 
+	name: function(name) { user = name; return "Name changed to " + user; },
+	help: function(param) {
 		var commandHelp = {
 			"pick": "picks up a item from floor",
 			"drop": "drops item to the floor",
 			"use": "uses item action",
-			"go": "moves one step to choosed direction",
 			"forward": "rotates forward",
 			"back": "rotates back",
 			"left": "rotates left",
 			"right": "rotates right",
 			"enter": "enters the door",
-			"say <smth>": "prints smth to console",
+			"say": "prints smth to console",
 			"inventory": "shows your inventory",
-			"choose <name>": "picks item from inventory",
+			"choose": "picks item from inventory",
 			"hand": "shows item in your hand",
-			"name <text>": "sets user name",
-			"help": "shows main help for the game",
-		}
+			"name": "sets user name",
+			"help": "shows main help for the game"
+		};
 
 		var helpString = commandHelp[param];
 		if (helpString != undefined) {
@@ -46,11 +44,32 @@ commandActions = {
 		}
 		return helpText;
 	},
-}
+    left: function() {
+        level.left();
+        map.innerHTML = drawMap(level.map());
+        return "Moved to left.";
+    },
+    right: function() {
+        level.right();
+        map.innerHTML = drawMap(level.map());
+        return "Moved to right.";
+    },
+    up: function() {
+        level.up();
+        map.innerHTML = drawMap(level.map());
+        return "Moved up.";
+    },
+    down: function() {
+        level.down();
+        map.innerHTML = drawMap(level.map());
+        return "Moved down.";
+    }
+};
 
 function startCommand(command, param) {
 	action = commandActions[command];
 	if (action != undefined) {
 		return action(param);
 	}
+    return "No such command.";
 }
