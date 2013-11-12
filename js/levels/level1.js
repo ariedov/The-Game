@@ -46,8 +46,8 @@ Level1.prototype.left = function () {
     if (user.position.x > 0 && nextIsFree) {
         labyrinth[user.position.y][user.position.x - 1] = USER;
         labyrinth[user.position.y][user.position.x] = NONE;
+        this.user.position.x = user.position.x - 1;
     }
-    this.user.position.x = user.position.x - 1;
 };
 
 Level1.prototype.right = function () {
@@ -57,8 +57,8 @@ Level1.prototype.right = function () {
     if (user.position.x < labyrinth[user.position.y].length && nextIsFree) {
         labyrinth[user.position.y][user.position.x + 1] = USER;
         labyrinth[user.position.y][user.position.x] = NONE;
+        this.user.position.x = user.position.x + 1;
     }
-    this.user.position.x = user.position.x + 1;
 };
 
 Level1.prototype.up = function () {
@@ -68,8 +68,8 @@ Level1.prototype.up = function () {
     if (user.position.y > 0 && nextIsFree) {
         labyrinth[user.position.y - 1][user.position.x] = USER;
         labyrinth[user.position.y][user.position.x] = NONE;
+        this.user.position.y = user.position.y - 1;
     }
-    this.user.position.y = user.position.y - 1;
 };
 
 Level1.prototype.down = function () {
@@ -79,8 +79,8 @@ Level1.prototype.down = function () {
     if (user.position.y < labyrinth.length && nextIsFree) {
         labyrinth[user.position.y + 1][user.position.x] = USER;
         labyrinth[user.position.y][user.position.x] = NONE;
+        this.user.position.y = user.position.y + 1;
     }
-    this.user.position.y = user.position.y + 1;
 };
 
 Level1.prototype.pick = function () {
