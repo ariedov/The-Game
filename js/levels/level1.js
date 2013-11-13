@@ -90,10 +90,10 @@ Level1.prototype.down = function () {
 };
 
 Level1.prototype.pick = function () {
-    var labyrinthItem = labyrinth[user.position.y][user.position.x];
-    if (labyrinthItem == JACK) {
-        this.user.pick(labyrinthItem);
-        labyrinth[user.position.y][user.position.x] = NONE;
+    var user = this.user;
+    if (steppedItem == JACK) {
+        this.user.pick(steppedItem);
+        steppedItem = NONE;
     }
 };
 

@@ -40,3 +40,7 @@
     overflow: hidden;
     box-sizing: border-box;
 }
+
+#map td {
+    text-align: center;
+}

@@ -63,6 +63,11 @@ commandActions = {
         level.down();
         map.innerHTML = drawMap(level.map());
         return "Moved down.";
+    },
+    pick: function() {
+        level.pick();
+        map.innerHTML = drawMap(level.map());
+        return "Item picked";
     }
 };
 
