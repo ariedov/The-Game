@@ -14,7 +14,7 @@ Main actions:
     enter - enters the door.
     say <smth> - prints smth to the console.
     inventory - shows your inventory
-    pick <name> - picks item from inverntory
+    choose <name> - picks item from inverntory
     hand - shows item in your hand
     name <text> - sets user name	
     

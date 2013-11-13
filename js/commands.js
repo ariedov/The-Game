@@ -68,6 +68,9 @@ commandActions = {
         level.pick();
         map.innerHTML = drawMap(level.map());
         return "Item picked";
+    },
+    inventory: function() {
+        return level.user.inventory();
     }
 };
 

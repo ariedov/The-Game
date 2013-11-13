@@ -32,3 +32,19 @@ User.prototype.use = function() {
 User.prototype.getPosition = function() {
     return this.position;
 };
+
+User.prototype.inventory = function() {
+    var inventory = [];
+    for (var i = 0; i < this.bag.length; i++) {
+        switch (this.bag[i]) {
+            case JACK:
+                inventory.push("jack");
+                break;
+        }
+    }
+
+    if (inventory.length == 0) {
+        inventory.push("Bag is empty");
+    }
+    return inventory;
+}
