@@ -71,6 +71,9 @@ commandActions = {
     },
     inventory: function() {
         return level.user.inventory();
+    },
+    hand: function() {
+        return level.user.handItem();
     }
 };
 

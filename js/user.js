@@ -6,6 +6,7 @@ function User() {
 
     this.bag = [];
     this.currentItem = undefined;
+    this.hand = NONE;
 }
 
 User.prototype.setPosition = function(x, y) {
@@ -15,6 +16,9 @@ User.prototype.setPosition = function(x, y) {
 
 User.prototype.pick = function(item) {
     this.bag.push(item);
+    if (this.hand == NONE) {
+        this.hand = item;
+    }
 };
 
 User.prototype.select = function(item) {
@@ -36,15 +40,25 @@ User.prototype.getPosition = function() {
 User.prototype.inventory = function() {
     var inventory = [];
     for (var i = 0; i < this.bag.length; i++) {
-        switch (this.bag[i]) {
-            case JACK:
-                inventory.push("jack");
-                break;
-        }
+        inventory.push(getItemName(this.bag[i]));
     }
 
     if (inventory.length == 0) {
         inventory.push("Bag is empty");
     }
     return inventory;
+}
+
+User.prototype.handItem = function() {
+    return getItemName(this.hand);
+}
+
+function getItemName(item) {
+    var itemName = "No item in hand.";
+    switch (item) {
+        case JACK:
+            itemName = "jack";
+            break;
+    }
+    return itemName;
 }
