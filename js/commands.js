@@ -74,6 +74,9 @@ commandActions = {
     },
     hand: function() {
         return level.user.handItem();
+    },
+    drop: function(item) {
+	return level.user.drop(item);
     }
 };
 

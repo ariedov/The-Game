@@ -21,6 +21,17 @@ User.prototype.pick = function(item) {
     }
 };
 
+User.prototype.drop = function(item) {
+	var bag = this.bag;
+	var itemIndex = bag.indexOf(item);
+	if (itemIndex > -1) {
+		this.bag/slice(index, 1);
+		return item + " dropped";
+	} else {
+		return "There is no such item: " + item;
+	}
+}
+
 User.prototype.select = function(item) {
     if (this.bag.contains(item)) {
         this.currentItem = item;
