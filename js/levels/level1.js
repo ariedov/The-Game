@@ -101,4 +101,13 @@ Level1.prototype.map = function() {
     return labyrinth;
 };
 
+Level1.prototype.drop = function(item) {
+	var user = this.user;
+	if (this.user.drop(item)) {
+		labyrinth[user.position.y][user.position.x] = item;
+		return "Item " + item + " dropped";
+	} else {
+		return "No such item in inventory";
+	}
+}
 

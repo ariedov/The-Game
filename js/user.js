@@ -25,10 +25,10 @@ User.prototype.drop = function(item) {
 	var bag = this.bag;
 	var itemIndex = bag.indexOf(item);
 	if (itemIndex > -1) {
-		this.bag/slice(index, 1);
-		return item + " dropped";
+		this.bag.slice(index, 1);
+		return true;
 	} else {
-		return "There is no such item: " + item;
+		return false;
 	}
 }
 
