@@ -2,7 +2,6 @@ var commandHistory = [];
 var historyCursor = 0;
 var leftCursor = 0;
 var battlefield;
-var user;
 var level;
 var map;
 
@@ -137,8 +136,8 @@ function enterPressed() {
 }
 
 function writeConsoleLine() {
-    //var user = window.name;
-    battlefield.value += "\n" + ((typeof user === 'undefined') ? ("noname") : (user)) + "@thegame $ ";
+    var name = user.name;
+    battlefield.value += "\n" + ((typeof name === 'undefined') ? ("noname") : (name)) + "@thegame $ ";
 }
 
 function backspacePressed() {

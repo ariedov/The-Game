@@ -19,9 +19,8 @@ var labyrinth = [
 ];
 
 function Level1() {
-    this.user = new User();
     var position = findUserPosition();
-    this.user.setPosition(position[0], position[1]);
+    user.setPosition(position[0], position[1]);
 }
 
 function findUserPosition() {
@@ -42,57 +41,52 @@ Level1.prototype.load = function () {
 };
 
 Level1.prototype.left = function () {
-    var user = this.user;
     var nextPosition = labyrinth[user.position.y][user.position.x - 1];
     var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
     if (user.position.x > 0 && nextIsFree) {
         labyrinth[user.position.y][user.position.x] = steppedItem;
         steppedItem = labyrinth[user.position.y][user.position.x - 1];
         labyrinth[user.position.y][user.position.x - 1] = USER;
-        this.user.position.x = user.position.x - 1;
+        user.position.x = user.position.x - 1;
     }
 };
 
 Level1.prototype.right = function () {
-    var user = this.user;
     var nextPosition = labyrinth[user.position.y][user.position.x + 1];
     var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
     if (user.position.x < labyrinth[user.position.y].length && nextIsFree) {
         labyrinth[user.position.y][user.position.x] = steppedItem;
         steppedItem = labyrinth[user.position.y][user.position.x + 1];
         labyrinth[user.position.y][user.position.x + 1] = USER;
-        this.user.position.x = user.position.x + 1;
+        user.position.x = user.position.x + 1;
     }
 };
 
 Level1.prototype.up = function () {
-    var user = this.user;
     var nextPosition = labyrinth[user.position.y - 1][user.position.x];
     var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
     if (user.position.y > 0 && nextIsFree) {
         labyrinth[user.position.y][user.position.x] = steppedItem;
         steppedItem = labyrinth[user.position.y - 1][user.position.x];
         labyrinth[user.position.y - 1][user.position.x] = USER;
-        this.user.position.y = user.position.y - 1;
+        user.position.y = user.position.y - 1;
     }
 };
 
 Level1.prototype.down = function () {
-    var user = this.user;
     var nextPosition = labyrinth[user.position.y + 1][user.position.x];
     var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
     if (user.position.y < labyrinth.length && nextIsFree) {
         labyrinth[user.position.y][user.position.x] = steppedItem;
         steppedItem = labyrinth[user.position.y + 1][user.position.x];
         labyrinth[user.position.y + 1][user.position.x] = USER;
-        this.user.position.y = user.position.y + 1;
+        user.position.y = user.position.y + 1;
     }
 };
 
 Level1.prototype.pick = function () {
-    var user = this.user;
     if (steppedItem == JACK) {
-        this.user.pick(steppedItem);
+        user.pick(steppedItem);
         steppedItem = NONE;
     }
 };
@@ -102,8 +96,7 @@ Level1.prototype.map = function() {
 };
 
 Level1.prototype.drop = function(item) {
-	var user = this.user;
-	if (this.user.drop(item)) {
+	if (user.drop(item)) {
 		labyrinth[user.position.y][user.position.x] = item;
 		return "Item " + item + " dropped";
 	} else {

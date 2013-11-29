@@ -1,5 +1,3 @@
-var user;
-
 var helpText = 	"pick - picks up a item from floor.\n" +
 	 	"drop - drops item to the floor.\n" +
 		"use - uses item action.\n"+
@@ -19,7 +17,7 @@ var helpText = 	"pick - picks up a item from floor.\n" +
 		"help <item> - shows item help\n";
 
 commandActions = {
-	name: function(name) { user = name; return "Name changed to " + user; },
+	name: function(name) { user.name = name; return "Name changed to " + user.name; },
 	help: function(param) {
 		var commandHelp = {
 			"pick": "picks up a item from floor",
