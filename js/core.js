@@ -2,7 +2,6 @@ var commandHistory = [];
 var historyCursor = 0;
 var leftCursor = 0;
 var battlefield;
-var level;
 var map;
 
 var enteredText = "";
@@ -28,7 +27,6 @@ window.onload = function () {
     battlefield.onkeydown = textAreaKeyPress;
     battlefield.onmousedown = textAreaMouseDown;
 
-    level = new Level1();
     level.load();
     map.innerHTML = drawMap(level.map());
     writeConsoleLine();

@@ -1,29 +1,98 @@
-var welcomeText =
-    "Welcome stranger.\nPlease, say me your name using `name <your_name> command`";
-
 var NONE = 0;
 var WALL = 1;
 var JACK = 2;
 var USER = 3;
 var DOOR = 4;
 
-var doorOpened = false;
 
-var steppedItem = NONE;
+level = {
+	welcomeText:
+    	"Welcome stranger.\nPlease, say me your name using `name <your_name> command`",
 
-var labyrinth = [
-    [USER, NONE, WALL, NONE],
-    [WALL, NONE, NONE, NONE],
-    [JACK, NONE, WALL, NONE],
-    [WALL, WALL, DOOR, NONE]
-];
+	doorOpened: false,
 
-function Level1() {
-    var position = findUserPosition();
-    user.setPosition(position[0], position[1]);
+	steppedItem: NONE,
+
+	labyrinth: [
+	    [USER, NONE, WALL, NONE],
+	    [WALL, NONE, NONE, NONE],
+	    [JACK, NONE, WALL, NONE],
+	    [WALL, WALL, DOOR, NONE]
+	],
+
+	load: function() {
+   		position = findUserPosition(this.labyrinth),
+   	 	user.setPosition(position[0], position[1]);
+    		battlefield.value += this.welcomeText;
+	},
+
+
+	left: function () {
+	    var nextPosition = this.labyrinth[user.position.y][user.position.x - 1];
+	    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+	    if (user.position.x > 0 && nextIsFree) {
+	        this.labyrinth[user.position.y][user.position.x] = this.steppedItem;
+	        this.steppedItem = this.labyrinth[user.position.y][user.position.x - 1];
+	        this.labyrinth[user.position.y][user.position.x - 1] = USER;
+	        user.position.x = user.position.x - 1;
+	    }
+	},
+
+	right: function () {
+   	    var nextPosition = this.labyrinth[user.position.y][user.position.x + 1];
+	    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+	    if (user.position.x < this.labyrinth[user.position.y].length && nextIsFree) {
+	        this.labyrinth[user.position.y][user.position.x] = this.steppedItem;
+	        this.steppedItem = this.labyrinth[user.position.y][user.position.x + 1];
+	        this.labyrinth[user.position.y][user.position.x + 1] = USER;
+	        user.position.x = user.position.x + 1;
+	    }
+	},
+
+	up: function () {
+   	    var nextPosition = this.labyrinth[user.position.y - 1][user.position.x];
+	    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+	    if (user.position.y > 0 && nextIsFree) {
+	        this.labyrinth[user.position.y][user.position.x] = this.steppedItem;
+	        this.steppedItem = labyrinth[user.position.y - 1][user.position.x];
+	        this.labyrinth[user.position.y - 1][user.position.x] = USER;
+	        user.position.y = user.position.y - 1;
+	    }
+	},
+
+	down: function () {
+	    var nextPosition = this.labyrinth[user.position.y + 1][user.position.x];
+	    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
+	    if (user.position.y < this.labyrinth.length && nextIsFree) {
+	        this.labyrinth[user.position.y][user.position.x] = this.steppedItem;
+	        this.steppedItem = this.labyrinth[user.position.y + 1][user.position.x];
+	        this.labyrinth[user.position.y + 1][user.position.x] = USER;
+	        user.position.y = user.position.y + 1;
+	    }
+	},
+
+	pick: function () {
+	    if (this.steppedItem == JACK) {
+	        user.pick(this.steppedItem);
+	        this.steppedItem = NONE;
+	    }
+	},
+
+	map: function() {
+	    return this.labyrinth;
+	},
+
+	drop: function(item) {
+		if (user.drop(item)) {
+			this.labyrinth[user.position.y][user.position.x] = item;
+			return "Item " + item + " dropped";
+		} else {
+			return "No such item in inventory";
+		}
+	}
 }
 
-function findUserPosition() {
+function findUserPosition(labyrinth) {
     var x,y;
     for (var i = 0; i < labyrinth.length; i++) {
         for (var j = 0; j < labyrinth[i].length; j++) {
@@ -35,72 +104,3 @@ function findUserPosition() {
     }
     return [x, y];
 }
-
-Level1.prototype.load = function () {
-    battlefield.value += welcomeText;
-};
-
-Level1.prototype.left = function () {
-    var nextPosition = labyrinth[user.position.y][user.position.x - 1];
-    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
-    if (user.position.x > 0 && nextIsFree) {
-        labyrinth[user.position.y][user.position.x] = steppedItem;
-        steppedItem = labyrinth[user.position.y][user.position.x - 1];
-        labyrinth[user.position.y][user.position.x - 1] = USER;
-        user.position.x = user.position.x - 1;
-    }
-};
-
-Level1.prototype.right = function () {
-    var nextPosition = labyrinth[user.position.y][user.position.x + 1];
-    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
-    if (user.position.x < labyrinth[user.position.y].length && nextIsFree) {
-        labyrinth[user.position.y][user.position.x] = steppedItem;
-        steppedItem = labyrinth[user.position.y][user.position.x + 1];
-        labyrinth[user.position.y][user.position.x + 1] = USER;
-        user.position.x = user.position.x + 1;
-    }
-};
-
-Level1.prototype.up = function () {
-    var nextPosition = labyrinth[user.position.y - 1][user.position.x];
-    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
-    if (user.position.y > 0 && nextIsFree) {
-        labyrinth[user.position.y][user.position.x] = steppedItem;
-        steppedItem = labyrinth[user.position.y - 1][user.position.x];
-        labyrinth[user.position.y - 1][user.position.x] = USER;
-        user.position.y = user.position.y - 1;
-    }
-};
-
-Level1.prototype.down = function () {
-    var nextPosition = labyrinth[user.position.y + 1][user.position.x];
-    var nextIsFree =  nextPosition != undefined && nextPosition != WALL;
-    if (user.position.y < labyrinth.length && nextIsFree) {
-        labyrinth[user.position.y][user.position.x] = steppedItem;
-        steppedItem = labyrinth[user.position.y + 1][user.position.x];
-        labyrinth[user.position.y + 1][user.position.x] = USER;
-        user.position.y = user.position.y + 1;
-    }
-};
-
-Level1.prototype.pick = function () {
-    if (steppedItem == JACK) {
-        user.pick(steppedItem);
-        steppedItem = NONE;
-    }
-};
-
-Level1.prototype.map = function() {
-    return labyrinth;
-};
-
-Level1.prototype.drop = function(item) {
-	if (user.drop(item)) {
-		labyrinth[user.position.y][user.position.x] = item;
-		return "Item " + item + " dropped";
-	} else {
-		return "No such item in inventory";
-	}
-}
-

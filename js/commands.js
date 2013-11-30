@@ -68,10 +68,10 @@ commandActions = {
         return "Item picked";
     },
     inventory: function() {
-        return level.user.inventory();
+        return user.inventory();
     },
     hand: function() {
-        return level.user.handItem();
+        return user.handItem();
     },
     drop: function(item) {
 	return level.drop(item);
