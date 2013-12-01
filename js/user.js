@@ -1,7 +1,4 @@
-
 user = {
-	
-    
     	position: {
 		x: 0,
     		y: 0
@@ -68,14 +65,5 @@ user = {
     		return getItemName(this.hand);
 	},
 
-}
-function getItemName(item) {
-    	var itemName = "No item in hand.";
-    	switch (item) {
-        	case JACK:
-         		itemName = "jack";
-           		break;
-    	}
-    	return itemName;
 }
 

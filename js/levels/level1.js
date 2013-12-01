@@ -1,9 +1,3 @@
-var NONE = 0;
-var WALL = 1;
-var JACK = 2;
-var USER = 3;
-var DOOR = 4;
-
 
 level = {
 	welcomeText:
